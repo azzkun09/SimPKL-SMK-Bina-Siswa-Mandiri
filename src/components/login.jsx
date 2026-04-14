@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Activity } from 'lucide-react';
 import { Player } from "@lottiefiles/react-lottie-player";
 
-export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, pengaturan }) {
+export default function Login({ setUser, supabase, pengaturan }) {
 
   const [loginRole, setLoginRole] = useState('siswa');
   const [username, setUsername] = useState('');
@@ -32,48 +32,32 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
     admin: 'bg-purple-400/30'
   };
 
-  // 🔥 LOGIN SUPABASE (INI YANG PENTING)
+  // 🔥 LOGIN FIX TANPA AUTH
   const handleLogin = async () => {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: username + "@mail.com",
-    password: password,
-  });
+    if (!username || !password) {
+      alert("Isi username & password dulu!");
+      return;
+    }
 
-  if (error) {
-    alert("Login gagal: " + error.message);
-    return;
-  }
+    const { data, error } = await supabase
+      .from(loginRole) // tabel: siswa / guru / admin
+      .select("*")
+      .eq("username", username)
+      .eq("password", password)
+      .single();
 
-  const userAuth = data.user;
+    if (error || !data) {
+      alert("Username atau password salah!");
+      return;
+    }
 
-  // 🔥 CEK ROLE KE DATABASE
-  const { data: userData, error: roleError } = await supabase
-    .from("users")
-    .select("*")
-    .eq("id", userAuth.id)
-    .single();
-
-  if (roleError || !userData) {
-    alert("Data user tidak ditemukan!");
-    return;
-  }
-
-  // 🔥 VALIDASI ROLE
-  if (userData.role !== loginRole) {
-    alert("Role tidak sesuai!");
-    await supabase.auth.signOut();
-    return;
-  }
-
-  // 🔥 INI YANG PALING PENTING
-  setUser(userData);
-
-  // optional: simpan ke localStorage biar gak logout
-  localStorage.setItem("user", JSON.stringify(userData));
-};
+    // ✅ sukses login
+    setUser(data);
+    localStorage.setItem("user", JSON.stringify(data));
+  };
 
   return (
-    <div className={`min-h-screen flex flex-col justify-between relative overflow-x-hidden bg-gradient-to-br ${bgThemes[loginRole]}`}>
+    <div className={`min-h-screen flex flex-col justify-between bg-gradient-to-br ${bgThemes[loginRole]}`}>
 
       {/* HEADER */}
       <div className="absolute top-4 left-6 z-30 flex items-center gap-3 px-4 py-2 rounded-2xl 
@@ -87,7 +71,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
           </div>
         )}
 
-        <div className="leading-tight">
+        <div>
           <h1 className="text-white font-bold text-sm">
             {pengaturan?.namaAplikasi || 'SimPKL'}
           </h1>
@@ -97,52 +81,35 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
         </div>
       </div>
 
-      {/* GLOW */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className={`absolute -top-40 -left-32 w-[500px] h-[500px] rounded-full ${glowThemes[loginRole]} blur-[140px]`} />
-        <div className={`absolute bottom-[-100px] right-[-80px] w-[400px] h-[400px] rounded-full ${glowThemes[loginRole]} blur-[120px]`} />
-      </div>
-
       {/* HERO */}
-      <div className={`w-full h-[250px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[60px] md:rounded-b-[70px] relative flex items-end justify-center`}>
+      <div className={`w-full h-[250px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[60px] flex items-end justify-center relative`}>
 
         {/* LOTTIE */}
-        <div className="absolute bottom-[-10px] md:bottom-[-50px] z-0 pointer-events-none">
+        <div className="absolute bottom-[-15px] md:bottom-[-60px]">
           <Player
             autoplay
             loop
             src="/lottie/login.json"
-            className="w-[230px] sm:w-[260px] md:w-[320px] lg:w-[380px]"
+            className="w-[260px] md:w-[320px]"
           />
         </div>
 
       </div>
 
       {/* CARD */}
-      <div className="w-full flex justify-center px-4 mt-10 md:mt-20">
+      <div className="w-full flex justify-center px-4 mt-12 md:mt-24">
 
-        <div className="
-          w-full 
-          max-w-[330px] md:max-w-[420px]
-          bg-white/80 
-          backdrop-blur-2xl 
-          p-5 md:p-8 
-          rounded-[24px] md:rounded-[28px]
-          shadow-[0_15px_40px_rgba(0,0,0,0.25)]
-          border border-white/20
-          relative z-20
-        ">
+        <div className="w-full max-w-[340px] md:max-w-[420px] bg-white/80 backdrop-blur-2xl 
+          p-5 md:p-8 rounded-[26px] shadow-xl border border-white/20">
 
           {/* HEADER */}
           <div className="text-center mb-4">
             <h1 className="text-lg md:text-2xl font-bold text-gray-800">
-              {loginRole === 'siswa' && 'Login Siswa'}
-              {loginRole === 'guru' && 'Login Guru'}
-              {loginRole === 'admin' && 'Login Admin'}
+              Login {loginRole}
             </h1>
 
-            <p className="text-gray-400 text-xs md:text-sm mt-1">
-              {pengaturan?.namaSekolah || 'SMK Bina Siswa Mandiri'}
+            <p className="text-gray-400 text-xs md:text-sm">
+              {pengaturan?.namaSekolah}
             </p>
           </div>
 
@@ -152,10 +119,9 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
               <button
                 key={r}
                 onClick={() => setLoginRole(r)}
-                className={`flex-1 py-2 rounded-lg text-sm capitalize transition-all duration-300
-                ${
-                  loginRole === r
-                    ? `${buttonThemes[r]} text-white shadow-md scale-105`
+                className={`flex-1 py-2 rounded-lg text-sm capitalize
+                ${loginRole === r
+                    ? `${buttonThemes[r]} text-white`
                     : 'bg-gray-100 text-gray-500'
                 }`}
               >
@@ -170,7 +136,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full mb-3 py-2.5 px-4 rounded-xl text-sm bg-white/80 focus:ring-2 focus:ring-emerald-400 outline-none"
+            className="w-full mb-3 py-2.5 px-4 rounded-xl bg-white"
           />
 
           <input
@@ -178,20 +144,13 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full mb-4 py-2.5 px-4 rounded-xl text-sm bg-white/80 focus:ring-2 focus:ring-emerald-400 outline-none"
+            className="w-full mb-4 py-2.5 px-4 rounded-xl bg-white"
           />
 
           {/* BUTTON */}
           <button
             onClick={handleLogin}
-            className={`
-              w-full py-2.5
-              rounded-xl
-              text-white text-sm font-semibold
-              shadow-md hover:shadow-lg
-              transition-all duration-300
-              ${buttonThemes[loginRole]}
-            `}
+            className={`w-full py-2.5 rounded-xl text-white font-semibold ${buttonThemes[loginRole]}`}
           >
             Masuk →
           </button>
@@ -200,8 +159,8 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       </div>
 
       {/* FOOTER */}
-      <footer className="text-center text-gray-300 text-xs md:text-sm pb-6 mt-6">
-        © 2026 {pengaturan?.namaSekolah || 'SMK Bina Siswa Mandiri'}
+      <footer className="text-center text-gray-300 text-xs pb-6 mt-6">
+        © 2026 {pengaturan?.namaSekolah}
       </footer>
 
     </div>
