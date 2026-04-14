@@ -71,13 +71,19 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
 
         {/* LOTTIE */}
-        <div className="mt-16 flex justify-center">
-          <Player
+        <div className="flex justify-center mt-6 md:mt-10">
+        <Player
             autoplay
             loop
             src="/lottie/login.json"
-            className="w-[340px] md:w-[380px] mx-auto drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)]"
-          />
+            className="
+            w-[220px] 
+            sm:w-[260px] 
+            md:w-[320px] 
+            lg:w-[380px]
+            mx-auto
+            "
+        />
         </div>
 
       </div>
