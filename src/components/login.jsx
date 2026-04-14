@@ -77,7 +77,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
             loop
             src="/lottie/login.json"
             className="
-            w-[220px] 
+            w-[250px] 
             sm:w-[260px] 
             md:w-[320px] 
             lg:w-[380px]
