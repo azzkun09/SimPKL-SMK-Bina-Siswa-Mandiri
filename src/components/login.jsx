@@ -75,7 +75,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
           <Player
             autoplay
             loop
-            src="public/lottie/login.json"
+            src="/lottie/login.json"
             className="w-[340px] md:w-[380px] mx-auto drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)]"
           />
         </div>
