@@ -72,11 +72,12 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 
   {/* LOTTIE */}
   <div className="
-    absolute 
-    bottom-[-10px]     /* 🔥 lebih turun dikit (biar deket card) */
-    md:bottom-[-50px]
-    z-20
-  ">
+  absolute 
+  bottom-[-10px]
+  md:bottom-[-50px]
+  z-0
+  pointer-events-none
+">
     <Player
       autoplay
       loop
@@ -173,14 +174,14 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 
         {/* BUTTON */}
         <button
-        className="
+        className={`
             w-full py-2.5
             rounded-xl
-            bg-gradient-to-r from-emerald-500 to-emerald-600
             text-white text-sm font-semibold
             shadow-md hover:shadow-lg
             transition-all duration-300
-        "
+            ${buttonThemes[loginRole]}
+        `}
         >
         Masuk →
         </button>
