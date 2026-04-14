@@ -37,7 +37,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
   };
 
   return (
-    <div className={`min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-br ${bgThemes[loginRole]}`}>
+    <div className={`min-h-screen flex flex-col relative overflow-x-hidden bg-gradient-to-br ${bgThemes[loginRole]}`}>
 
       {/* HEADER */}
       <div className="absolute top-4 left-6 z-30 flex items-center gap-3 px-4 py-2 rounded-2xl 
@@ -71,7 +71,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
 
         {/* LOTTIE */}
-        <div className="translate-y-28">
+        <div className="mt-16 flex justify-center">
           <Player
             autoplay
             loop
