@@ -71,7 +71,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
         <div className={`w-full h-[300px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] flex flex-col items-center justify-end`}>
 
         {/* LOTTIE */}
-        <div className="absolute bottom-2 md:-bottom-20 left-1/2 -translate-x-1/2 z-20">
+        <div className="absolute -bottom-4 md:-bottom-20">
             <Player
             autoplay
             loop
@@ -88,8 +88,8 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 
         </div>
 
-        {/* CARD */}
-        <div className="w-full flex justify-center px-4 mt-8 md:mt-28 relative z-10">
+                {/* CARD */}
+        <div className="w-full flex justify-center px-4 mt-6 md:mt-28">
 
         <div className="
             w-full 
