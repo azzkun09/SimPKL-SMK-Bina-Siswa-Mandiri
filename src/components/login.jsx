@@ -44,18 +44,17 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
     return;
   }
 
-  // 🔥 ambil user login
-  const user = data.user;
+  const userAuth = data.user;
 
-  // 🔥 cek ke tabel user kamu (misal: users)
+  // 🔥 CEK ROLE KE DATABASE
   const { data: userData, error: roleError } = await supabase
     .from("users")
-    .select("role")
-    .eq("id", user.id)
+    .select("*")
+    .eq("id", userAuth.id)
     .single();
 
-  if (roleError) {
-    alert("Gagal ambil data user");
+  if (roleError || !userData) {
+    alert("Data user tidak ditemukan!");
     return;
   }
 
@@ -66,14 +65,11 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
     return;
   }
 
-  // ✅ kalau cocok → masuk
-  if (loginRole === "admin") {
-    navigate("/admin");
-  } else if (loginRole === "guru") {
-    navigate("/guru");
-  } else {
-    navigate("/siswa");
-  }
+  // 🔥 INI YANG PALING PENTING
+  setUser(userData);
+
+  // optional: simpan ke localStorage biar gak logout
+  localStorage.setItem("user", JSON.stringify(userData));
 };
 
   return (
