@@ -34,31 +34,47 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 
   // 🔥 LOGIN SUPABASE (INI YANG PENTING)
   const handleLogin = async () => {
-    if (!username || !password) {
-      alert("Isi username & password");
-      return;
-    }
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: username + "@mail.com",
+    password: password,
+  });
 
-    try {
-      const { data, error } = await supabase
-        .from(loginRole)
-        .select('*')
-        .eq('username', username)
-        .eq('password', password)
-        .single();
+  if (error) {
+    alert("Login gagal: " + error.message);
+    return;
+  }
 
-      if (error || !data) {
-        alert("Login gagal");
-        return;
-      }
+  // 🔥 ambil user login
+  const user = data.user;
 
-      setUser(data);
+  // 🔥 cek ke tabel user kamu (misal: users)
+  const { data: userData, error: roleError } = await supabase
+    .from("users")
+    .select("role")
+    .eq("id", user.id)
+    .single();
 
-    } catch (err) {
-      console.error(err);
-      alert("Terjadi error login");
-    }
-  };
+  if (roleError) {
+    alert("Gagal ambil data user");
+    return;
+  }
+
+  // 🔥 VALIDASI ROLE
+  if (userData.role !== loginRole) {
+    alert("Role tidak sesuai!");
+    await supabase.auth.signOut();
+    return;
+  }
+
+  // ✅ kalau cocok → masuk
+  if (loginRole === "admin") {
+    navigate("/admin");
+  } else if (loginRole === "guru") {
+    navigate("/guru");
+  } else {
+    navigate("/siswa");
+  }
+};
 
   return (
     <div className={`min-h-screen flex flex-col justify-between relative overflow-x-hidden bg-gradient-to-br ${bgThemes[loginRole]}`}>
