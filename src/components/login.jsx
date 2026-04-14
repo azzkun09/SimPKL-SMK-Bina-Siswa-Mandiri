@@ -67,11 +67,11 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
         <div className={`absolute bottom-[-100px] right-[-80px] w-[400px] h-[400px] rounded-full ${glowThemes[loginRole]} blur-[120px]`} />
       </div>
 
-    {/* HERO */}
+        {/* HERO */}
         <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
 
         {/* LOTTIE */}
-        <div className="flex justify-center translate-y-12 md:translate-y-16">
+        <div className="flex justify-center translate-y-8 md:translate-y-12">
             <Player
             autoplay
             loop
@@ -92,7 +92,7 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
         <div className="flex-1 flex items-start justify-center px-4 relative z-20">
 
         <div className="bg-white/80 backdrop-blur-2xl p-8 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]
-            w-full max-w-[420px] -mt-10 md:-mt-16 border border-white/20">
+            w-full max-w-[420px] -mt-6 md:-mt-10 border border-white/20">
 
             {/* HEADER CARD (ANIMASI) */}
             <div className="text-center mb-6">
@@ -114,24 +114,24 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 
             </div>
 
-          {/* ROLE */}
-          <div className="flex gap-2 mb-4">
+            {/* ROLE */}
+            <div className="flex gap-2 mb-4">
             {['siswa', 'guru', 'admin'].map(r => (
-              <button
+                <button
                 key={r}
                 type="button"
                 onClick={() => setLoginRole(r)}
                 className={`flex-1 py-2 rounded-lg text-sm capitalize transition-all duration-300
                 ${
-                  loginRole === r
+                    loginRole === r
                     ? `${buttonThemes[r]} text-white shadow-lg scale-105`
                     : 'bg-gray-100 text-gray-500'
                 }`}
-              >
+                >
                 {r}
-              </button>
+                </button>
             ))}
-          </div>
+            </div>
 
           {/* FORM (ANIMASI) */}
           <form
