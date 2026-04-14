@@ -68,120 +68,104 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       </div>
 
         {/* HERO */}
-    <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
+        <div className={`w-full h-[300px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10`}>
 
-    {/* LOTTIE */}
-    <div className="absolute bottom-2 md:-bottom-20 left-1/2 -translate-x-1/2 z-20">
-        <Player
-        autoplay
-        loop
-        src="/lottie/login.json"
-        className="
-            w-[240px] 
-            sm:w-[280px] 
-            md:w-[320px] 
-            lg:w-[380px]
-        "
-        />
-    </div>
+        {/* LOTTIE */}
+        <div className="absolute bottom-2 md:-bottom-20 left-1/2 -translate-x-1/2 z-20">
+            <Player
+            autoplay
+            loop
+            src="/lottie/login.json"
+            className="
+                w-[240px] 
+                sm:w-[280px] 
+                md:w-[320px] 
+                lg:w-[380px]
+                mx-auto
+            "
+            />
+        </div>
 
-    </div>
+        </div>
 
-    {/* CARD */}
-    <div className="w-full flex justify-center px-4 mt-8 md:mt-28 relative z-10">
+        {/* CARD */}
+        <div className="w-full flex justify-center px-4 mt-10 md:mt-28 relative z-10">
 
         <div className="
-    w-full max-w-[320px] sm:max-w-[360px] md:max-w-[420px]
-    mt-2 md:mt-28
-    px-5 py-5 md:p-8
-    rounded-3xl
-    bg-white/70
-    backdrop-blur-xl
-    shadow-[0_10px_40px_rgba(0,0,0,0.25)]
-    border border-white/30
-    ">
+            w-full 
+            max-w-[380px] md:max-w-[420px]
+            bg-white/80 
+            backdrop-blur-2xl 
+            p-6 md:p-8 
+            rounded-[28px]
+            shadow-[0_25px_70px_rgba(0,0,0,0.25)]
+            border border-white/20
+        ">
 
-        {/* HEADER */}
-        <div className="text-center mb-4">
-        <div key={loginRole} className="animate-fadeInUp">
+            {/* HEADER */}
+            <div className="text-center mb-5">
 
-            <h1 className="text-lg md:text-2xl font-bold text-gray-800">
-            {loginRole === 'siswa' && 'Login Siswa'}
-            {loginRole === 'guru' && 'Login Guru'}
-            {loginRole === 'admin' && 'Login Admin'}
-            </h1>
+            <div key={loginRole} className="animate-fadeInUp">
+                <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+                {loginRole === 'siswa' && 'Login Siswa'}
+                {loginRole === 'guru' && 'Login Guru'}
+                {loginRole === 'admin' && 'Login Admin'}
+                </h1>
 
-            <p className="text-gray-400 text-xs md:text-sm mt-1">
-            {pengaturan?.namaSekolah || 'SMK Bina Siswa Mandiri'}
-            </p>
+                <p className="text-gray-500 text-xs md:text-sm mt-1">
+                {pengaturan?.namaSekolah || 'SMK Bina Siswa Mandiri'}
+                </p>
+            </div>
 
-        </div>
-        </div>
+            </div>
 
-        {/* ROLE */}
-        <div className="flex gap-2 mb-3">
-        {['siswa', 'guru', 'admin'].map(r => (
+            {/* ROLE */}
+            <div className="flex gap-2 mb-4">
+            {['siswa', 'guru', 'admin'].map(r => (
+                <button
+                key={r}
+                type="button"
+                onClick={() => setLoginRole(r)}
+                className={`flex-1 py-2 rounded-lg text-sm capitalize transition-all duration-300
+                ${
+                    loginRole === r
+                    ? `${buttonThemes[r]} text-white shadow-md scale-[1.03]`
+                    : 'bg-gray-100 text-gray-500'
+                }`}
+                >
+                {r}
+                </button>
+            ))}
+            </div>
+
+            {/* INPUT */}
+            <div className="space-y-3">
+
+            <input
+                type="text"
+                placeholder="Username"
+                className="w-full px-4 py-3 rounded-xl bg-gray-100 outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
+            />
+
+            <input
+                type="password"
+                placeholder="Password"
+                className="w-full px-4 py-3 rounded-xl bg-gray-100 outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
+            />
+
             <button
-            key={r}
-            type="button"
-            onClick={() => setLoginRole(r)}
-            className={`flex-1 py-2 rounded-lg text-sm capitalize transition-all duration-300
-            ${
-                loginRole === r
-                ? `${buttonThemes[r]} text-white shadow-md scale-105`
-                : 'bg-gray-100 text-gray-500'
-            }`}
+                className="w-full py-3 rounded-xl text-white font-medium 
+                bg-gradient-to-r from-emerald-400 to-emerald-600 
+                hover:scale-[1.02] transition-all duration-300 shadow-lg"
             >
-            {r}
+                Masuk →
             </button>
-        ))}
+
+            </div>
+
         </div>
 
-        {/* INPUT USERNAME */}
-        <input
-        type="text"
-        placeholder="Username"
-        className="
-            w-full mb-3
-            py-2.5 px-4
-            rounded-xl
-            text-sm
-            bg-white/80
-            focus:ring-2 focus:ring-emerald-400 outline-none
-        "
-        />
-
-        {/* INPUT PASSWORD */}
-        <input
-        type="password"
-        placeholder="Password"
-        className="
-            w-full mb-4
-            py-2.5 px-4
-            rounded-xl
-            text-sm
-            bg-white/80
-            focus:ring-2 focus:ring-emerald-400 outline-none
-        "
-        />
-
-        {/* BUTTON */}
-        <button
-        className="
-            w-full py-2.5
-            rounded-xl
-            bg-gradient-to-r from-emerald-500 to-emerald-600
-            text-white text-sm font-semibold
-            shadow-md hover:shadow-lg
-            transition-all duration-300
-        "
-        >
-        Masuk →
-        </button>
-
-    </div>
-
-    </div>
+        </div>
 
       {/* FOOTER */}
       <footer className="text-center text-gray-300 text-sm pb-4 relative z-20">
