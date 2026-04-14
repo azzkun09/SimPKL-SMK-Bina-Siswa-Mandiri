@@ -87,15 +87,15 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 
         </div>
 
-        {/* CARD */}
-        <div className="flex-1 flex items-start justify-center px-4 relative z-30">
+            {/* CARD */}
+            <div className="flex-1 flex items-start justify-center px-4 relative z-30">
 
-            <div className="bg-white/80 backdrop-blur-2xl 
-                p-4 md:p-8 
-                rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]
-                w-full max-w-[280px] sm:max-w-[320px] md:max-w-[420px] 
-                mt-14 md:mt-28 
-                border border-white/20">
+                <div className="bg-white/80 backdrop-blur-2xl 
+                    p-3 md:p-8 
+                    rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]
+                    w-full max-w-[270px] sm:max-w-[320px] md:max-w-[420px] 
+                    mt-10 md:mt-28 
+                    border border-white/20">
         
             {/* HEADER CARD (ANIMASI) */}
             <div className="text-center mb-6">
