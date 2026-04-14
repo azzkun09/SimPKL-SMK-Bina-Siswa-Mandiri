@@ -68,34 +68,34 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       </div>
 
         {/* HERO */}
-<div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10`}>
+        <div className={`w-full h-[300px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10`}>
 
-    {/* LOTTIE */}
-        <div className="absolute left-1/2 -bottom-12 md:-bottom-20 -translate-x-1/2 z-20">
-        <Player
-            autoplay
-            loop
-            src="/lottie/login.json"
-            className="
-            w-[260px] 
-            sm:w-[280px] 
-            md:w-[320px] 
-            lg:w-[380px]
-            "
-        />
+            {/* LOTTIE */}
+            <div className="absolute left-1/2 -bottom-4 md:-bottom-20 -translate-x-1/2 z-20">
+                <Player
+                    autoplay
+                    loop
+                    src="/lottie/login.json"
+                    className="
+                        w-[240px] 
+                        sm:w-[260px] 
+                        md:w-[320px] 
+                        lg:w-[380px]
+                    "
+                />
+            </div>
+
         </div>
 
-</div>
-
-    {/* CARD */}
+        {/* CARD */}
         <div className="flex-1 flex items-start justify-center px-4 relative z-30">
 
-        <div className="bg-white/80 backdrop-blur-2xl 
-            p-5 md:p-8 
-            rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]
-            w-full max-w-[340px] md:max-w-[420px] 
-            mt-20 md:mt-28 
-            border border-white/20">
+            <div className="bg-white/80 backdrop-blur-2xl 
+                p-4 md:p-8 
+                rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]
+                w-full max-w-[280px] sm:max-w-[320px] md:max-w-[420px] 
+                mt-14 md:mt-28 
+                border border-white/20">
         
             {/* HEADER CARD (ANIMASI) */}
             <div className="text-center mb-6">
