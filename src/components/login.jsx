@@ -67,8 +67,8 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
         <div className={`absolute bottom-[-100px] right-[-80px] w-[400px] h-[400px] rounded-full ${glowThemes[loginRole]} blur-[120px]`} />
       </div>
 
-                {/* HERO */}
-        <div className={`w-full h-[300px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10`}>
+        {/* HERO */}
+        <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
 
         {/* LOTTIE */}
         <div className="absolute bottom-2 md:-bottom-20 left-1/2 -translate-x-1/2 z-20">
@@ -81,7 +81,6 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
                 sm:w-[280px] 
                 md:w-[320px] 
                 lg:w-[380px]
-                mx-auto
             "
             />
         </div>
