@@ -68,10 +68,10 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       </div>
 
         {/* HERO */}
-        <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
+        <div className={`w-full h-[300px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] flex flex-col items-center justify-end`}>
 
         {/* LOTTIE */}
-        <div className="absolute bottom-2 md:-bottom-20 left-1/2 -translate-x-1/2 z-20">
+        <div className="translate-y-10 md:translate-y-16">
             <Player
             autoplay
             loop
@@ -81,25 +81,26 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
                 sm:w-[280px] 
                 md:w-[320px] 
                 lg:w-[380px]
+                mx-auto
             "
             />
         </div>
 
         </div>
 
-    {/* CARD */}
-    <div className="w-full flex justify-center px-4 mt-8 md:mt-28 relative z-10">
+        {/* CARD */}
+        <div className="w-full flex justify-center px-4 -mt-6 md:-mt-16">
 
         <div className="
-    w-full max-w-[320px] sm:max-w-[360px] md:max-w-[420px]
-    mt-2 md:mt-28
-    px-5 py-5 md:p-8
-    rounded-3xl
-    bg-white/70
-    backdrop-blur-xl
-    shadow-[0_10px_40px_rgba(0,0,0,0.25)]
-    border border-white/30
-    ">
+            w-full 
+            max-w-[380px] md:max-w-[420px]
+            bg-white/80 
+            backdrop-blur-2xl 
+            p-6 md:p-8 
+            rounded-[28px]
+            shadow-[0_20px_60px_rgba(0,0,0,0.3)]
+            border border-white/20
+        ">
 
         {/* HEADER */}
         <div className="text-center mb-4">
