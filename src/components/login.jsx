@@ -67,52 +67,52 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
         <div className={`absolute bottom-[-100px] right-[-80px] w-[400px] h-[400px] rounded-full ${glowThemes[loginRole]} blur-[120px]`} />
       </div>
 
-      {/* HERO */}
-      <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
+    {/* HERO */}
+        <div className={`w-full h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] relative z-10 flex items-end justify-center`}>
 
         {/* LOTTIE */}
-        <div className="flex justify-center mt-2 md:mt-6">
-        <Player
+        <div className="flex justify-center translate-y-12 md:translate-y-16">
+            <Player
             autoplay
             loop
             src="/lottie/login.json"
             className="
-            w-[220px] 
-            sm:w-[260px] 
-            md:w-[320px] 
-            lg:w-[380px]
-            mx-auto
+                w-[220px] 
+                sm:w-[260px] 
+                md:w-[320px] 
+                lg:w-[380px]
+                mx-auto
             "
-        />
+            />
         </div>
 
-      </div>
+        </div>
 
-      {/* CARD */}
-      <div className="flex-1 flex items-center justify-center px-4 relative z-20">
+        {/* CARD */}
+        <div className="flex-1 flex items-start justify-center px-4 relative z-20">
 
         <div className="bg-white/80 backdrop-blur-2xl p-8 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]
-          w-full max-w-[420px] mt-2 border border-white/20">
+            w-full max-w-[420px] -mt-10 md:-mt-16 border border-white/20">
 
-          {/* HEADER CARD (ANIMASI) */}
-          <div className="text-center mb-6">
+            {/* HEADER CARD (ANIMASI) */}
+            <div className="text-center mb-6">
 
             <div
-              key={loginRole}
-              className="animate-fadeInUp"
+                key={loginRole}
+                className="animate-fadeInUp"
             >
-              <h1 className="text-2xl font-bold text-gray-800">
+                <h1 className="text-2xl font-bold text-gray-800">
                 {loginRole === 'siswa' && 'Login Siswa'}
                 {loginRole === 'guru' && 'Login Guru'}
                 {loginRole === 'admin' && 'Login Admin'}
-              </h1>
+                </h1>
 
-              <p className="text-gray-400 text-sm mt-1">
+                <p className="text-gray-400 text-sm mt-1">
                 {pengaturan?.namaSekolah || 'SMK Bina Siswa Mandiri'}
-              </p>
+                </p>
             </div>
 
-          </div>
+            </div>
 
           {/* ROLE */}
           <div className="flex gap-2 mb-4">
