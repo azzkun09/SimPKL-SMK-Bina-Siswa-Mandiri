@@ -68,20 +68,24 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       </div>
 
         {/* HERO */}
-<div className={`w-full h-[300px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[70px] flex flex-col items-center justify-end`}>
+<div className={`w-full h-[260px] md:h-[320px] bg-gradient-to-r ${heroThemes[loginRole]} rounded-b-[60px] md:rounded-b-[70px] relative flex items-end justify-center`}>
 
   {/* LOTTIE */}
-  <div className="translate-y-10 md:translate-y-16">
+  <div className="
+    absolute 
+    bottom-[-30px]     /* HP */
+    md:bottom-[-60px]  /* Desktop */
+    z-20
+  ">
     <Player
       autoplay
       loop
       src="/lottie/login.json"
       className="
-        w-[240px] 
-        sm:w-[280px] 
-        md:w-[320px] 
+        w-[200px]       /* HP lebih kecil */
+        sm:w-[240px]
+        md:w-[320px]    /* Desktop */
         lg:w-[380px]
-        mx-auto
       "
     />
   </div>
@@ -89,17 +93,18 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 </div>
 
 {/* CARD */}
-<div className="w-full flex justify-center px-4 -mt-10 md:-mt-16">
+<div className="w-full flex justify-center px-4 mt-14 md:mt-24">
 
   <div className="
     w-full 
-    max-w-[380px] md:max-w-[420px]
+    max-w-[360px] md:max-w-[420px]   /* HP lebih kecil biar pas */
     bg-white/80 
     backdrop-blur-2xl 
-    p-6 md:p-8 
-    rounded-[28px]
-    shadow-[0_20px_60px_rgba(0,0,0,0.3)]
+    p-5 md:p-8                       /* padding HP lebih rapet */
+    rounded-[24px] md:rounded-[28px]
+    shadow-[0_15px_40px_rgba(0,0,0,0.25)]
     border border-white/20
+    relative z-10
   ">
 
         {/* HEADER */}
