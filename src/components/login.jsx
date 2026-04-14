@@ -40,32 +40,36 @@ export default function Login({ setUser, supabase, pengaturan }) {
   }
 
   const { data, error } = await supabase
-    .from(loginRole) // tetap pakai tabel kamu (siswa/guru/admin)
+    .from(loginRole)
     .select("*")
     .eq("username", username)
     .eq("password", password);
 
-  // kalau error dari supabase
+  // kalau error supabase
   if (error) {
-    console.error("Supabase error:", error);
+    console.error(error);
     alert("Terjadi kesalahan server");
     return;
   }
 
-  // kalau data kosong
+  // 🔥 INI KUNCI NYA (BIAR GAK CRASH)
   if (!data || data.length === 0) {
     alert("Username atau password salah!");
     return;
   }
 
+  // ambil user pertama
   const user = data[0];
 
-  // sukses login
+  // 🔥 pastikan user valid
+  if (!user) {
+    alert("Data user tidak ditemukan!");
+    return;
+  }
+
+  // simpan
   setUser(user);
   localStorage.setItem("user", JSON.stringify(user));
-
-  // optional redirect (kalau belum ada di App.jsx)
-  // window.location.href = `/${loginRole}`;
 };
 
   return (
