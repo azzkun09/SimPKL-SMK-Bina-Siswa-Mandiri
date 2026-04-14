@@ -34,27 +34,39 @@ export default function Login({ setUser, supabase, pengaturan }) {
 
   // 🔥 LOGIN FIX TANPA AUTH
   const handleLogin = async () => {
-    if (!username || !password) {
-      alert("Isi username & password dulu!");
-      return;
-    }
+  if (!username || !password) {
+    alert("Isi username & password dulu!");
+    return;
+  }
 
-    const { data, error } = await supabase
-      .from(loginRole) // tabel: siswa / guru / admin
-      .select("*")
-      .eq("username", username)
-      .eq("password", password)
-      .single();
+  const { data, error } = await supabase
+    .from(loginRole) // tetap pakai tabel kamu (siswa/guru/admin)
+    .select("*")
+    .eq("username", username)
+    .eq("password", password);
 
-    if (error || !data) {
-      alert("Username atau password salah!");
-      return;
-    }
+  // kalau error dari supabase
+  if (error) {
+    console.error("Supabase error:", error);
+    alert("Terjadi kesalahan server");
+    return;
+  }
 
-    // ✅ sukses login
-    setUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
-  };
+  // kalau data kosong
+  if (!data || data.length === 0) {
+    alert("Username atau password salah!");
+    return;
+  }
+
+  const user = data[0];
+
+  // sukses login
+  setUser(user);
+  localStorage.setItem("user", JSON.stringify(user));
+
+  // optional redirect (kalau belum ada di App.jsx)
+  // window.location.href = `/${loginRole}`;
+};
 
   return (
     <div className={`min-h-screen flex flex-col justify-between bg-gradient-to-br ${bgThemes[loginRole]}`}>
