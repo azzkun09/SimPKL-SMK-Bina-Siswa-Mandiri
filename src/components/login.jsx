@@ -73,8 +73,8 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
   {/* LOTTIE */}
   <div className="
     absolute 
-    bottom-[-20px]     /* HP lebih naik */
-    md:bottom-[-50px]  /* Desktop */
+    bottom-[-10px]     /* 🔥 lebih turun dikit (biar deket card) */
+    md:bottom-[-50px]
     z-20
   ">
     <Player
@@ -82,8 +82,8 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
       loop
       src="/lottie/login.json"
       className="
-        w-[200px] 
-        sm:w-[240px]
+        w-[230px]       /* 🔥 dibesarin dari sebelumnya */
+        sm:w-[260px]
         md:w-[320px]
         lg:w-[380px]
       "
@@ -93,11 +93,11 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
 </div>
 
 {/* CARD */}
-<div className="w-full flex justify-center px-4 mt-12 md:mt-20">
+<div className="w-full flex justify-center px-4 mt-10 md:mt-20">
 
   <div className="
     w-full 
-    max-w-[350px] md:max-w-[420px]   /* HP diperkecil dikit */
+    max-w-[330px] md:max-w-[420px]   /* 🔥 diperkecil biar gak melebar */
     bg-white/80 
     backdrop-blur-2xl 
     p-5 md:p-8 
@@ -190,9 +190,9 @@ export default function Login({ setUser, daftarSiswa, daftarGuru, supabase, peng
     </div>
 
       {/* FOOTER */}
-      <footer className="text-center text-gray-300 text-sm pb-4 relative z-20">
-        © 2026 {pengaturan?.namaSekolah || 'SMK Bina Siswa Mandiri'}
-      </footer>
+<footer className="mt-6 text-center text-gray-300 text-xs md:text-sm pb-6">
+  © 2026 {pengaturan?.namaSekolah || 'SMK Bina Siswa Mandiri'}
+</footer>
 
       {/* ANIMASI */}
       <style>
