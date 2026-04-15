@@ -574,17 +574,23 @@ export default function App() {
               </tr>
             </thead>
             <tbody>
-              {absensiSiswa.sort((a,b) => b.timestamp - a.timestamp).map((a, idx) => (
+              {(absensiSiswa || [])
+              .sort((a,b) => b.timestamp - a.timestamp)
+              .map((a, idx) => (
                 <tr key={a.id} className="break-inside-avoid">
                   <td className="border border-black px-3 py-2 text-center align-top">{idx + 1}</td>
                   <td className="border border-black px-3 py-2 text-center align-top font-semibold">{a.tanggal}</td>
                   <td className="border border-black px-3 py-2 text-center align-top">{a.waktu}</td>
                   <td className="border border-black px-3 py-2 text-center align-top font-bold">{a.jenis}</td>
                   <td className="border border-black px-3 py-2 align-top whitespace-pre-wrap">
-                    {a.jarak > 0 ? `Jarak valid: ${a.jarak}m (${a.status || 'Tepat Waktu'})` : (a.keterangan ? `${a.keterangan} (Status: ${a.status || 'Menunggu'})` : '-')}
+                    {a.jarak > 0 
+                      ? `Jarak valid: ${a.jarak}m (${a.status || 'Tepat Waktu'})` 
+                      : (a.keterangan 
+                          ? `${a.keterangan} (Status: ${a.status || 'Menunggu'})` 
+                          : '-')}
                   </td>
                 </tr>
-              ))}
+            ))}
             </tbody>
           </table>
 
